@@ -1,5 +1,5 @@
 
-const vPet = {
+const virtualPet = {
     minAge: 0,
     maxAge: 30,
     minHunger: 0,
@@ -12,18 +12,18 @@ const vPet = {
 class Pet {
     constructor (name) {
         this.name = name;
-        this.age = vPet.minAge;
-        this.hunger = vPet.minHunger;
-        this.fitness = vPet.maxFitness;
+        this.age = virtualPet.minAge;
+        this.hunger = virtualPet.minHunger;
+        this.fitness = virtualPet.maxFitness;
         this.children = [];
     }
 
     get isAlive () {
-        return this.fitness > vPet.minFitness && this.hunger < vPet.maxHunger && this.age < vPet.maxAge;
+        return this.fitness > virtualPet.minFitness && this.hunger < virtualPet.maxHunger && this.age < virtualPet.maxAge;
     }
    
     growUp () {
-        if (!this.isAlive) throw new Error (vPet.errorMessage);
+        if (!this.isAlive) throw new Error (virtualPet.errorMessage);
 
         this.age ++;
         this.hunger += 5;
@@ -31,27 +31,27 @@ class Pet {
     }
 
     walk () {
-        if (!this.isAlive) throw new Error (vPet.errorMessage);
+        if (!this.isAlive) throw new Error (virtualPet.errorMessage);
         
-        if ((this.fitness + 4) <= vPet.maxFitness) {
+        if (this.fitness + 4 <= virtualPet.maxFitness) {
             this.fitness += 4;
         } else {
-            this.fitness = vPet.maxFitness;
+            this.fitness = virtualPet.maxFitness;
         };
     }
 
     feed () {
-        if (!this.isAlive) throw new Error (vPet.errorMessage);
+        if (!this.isAlive) throw new Error (virtualPet.errorMessage);
 
-        if ((this.hunger - 3) >= vPet.minHunger) {
+        if (this.hunger - 3 >= virtualPet.minHunger) {
             this.hunger -= 3;
         } else {
-            this.hunger = vPet.minHunger;
+            this.hunger = virtualPet.minHunger;
         };
     }
 
     checkUp () {
-        if (!this.isAlive) throw new Error (vPet.errorMessage);
+        if (!this.isAlive) throw new Error (virtualPet.errorMessage);
 
         if (this.fitness <= 3 && this.hunger < 5) {
             return 'I need a walk';
@@ -66,14 +66,14 @@ class Pet {
     }
 //to create the pet from inside another pet
     haveBaby(babyName) {
-        if (!this.isAlive) throw new Error (vPet.errorMessage);
+        if (!this.isAlive) throw new Error (virtualPet.errorMessage);
 
         const child = new Pet (babyName);
         this.children.push(child);
     }
 //to use dependency injection to create a child pet
     adoptChild(child) {
-        if (!this.isAlive) throw new Error (vPet.errorMessage);
+        if (!this.isAlive) throw new Error (virtualPet.errorMessage);
 
         this.children.push(child);
     }
